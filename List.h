@@ -9,51 +9,50 @@
 #include "Cell.h"
 
 class List {
-    Cell *top;
-    int size;
 
-    inline void pop() {
 
-    }
+
 public:
-    List() : top(nullptr), size(0) {}; //Aka Nil
-    List(int x, const List &list) : top(nullptr), size(0) {
+    Cell *top;
+    List() : top(nullptr) {}; //Aka Nil
+    List(int x, const List &list) : top(nullptr) {
         this->top = new Cell(x);
         this->top->setNext(list.top);
-        size += (list.size + 1);
     }
-    List(const List& list) : top(list.top), size(list.size) {};
+
+    List(const List& list) : top(list.top){};
+
     List& operator = (const List& list)  {
         if (this != &list) {
-            this -> size = 0;
-            this -> top = nullptr;
-            Cell* copyCell = list.top;
-            Cell* existingCell = this -> top;
-            while (copyCell != nullptr) {
-                existingCell = new Cell (copyCell -> getValue());
-                ++size;
-                copyCell = copyCell -> getNext();
-                existingCell = existingCell -> getNext();
+            if (!list.empty()) {
+                this -> top = new Cell(list.top->getValue());
+                Cell* current = this -> top;
+                Cell* copyNext = list.top -> getNext();
+                while (copyNext != nullptr) {
+                    current ->setNext(new Cell(copyNext->getValue()));
+                    copyNext = copyNext -> getNext();
+                    current = current -> getNext();
+                }
             }
         }
         return *this;
     }
 
     inline int head() const {
-        if (this->size == 0)
+        if (this->top == nullptr)
             throw std::invalid_argument("Empty list, cannot get head of empty");
         return this->top->getValue();
     };
 
-    inline bool empty() const { return (this->size == 0); };
+    inline bool empty() const { return (this->top == nullptr); };
 
-    inline void tail() {
-        if (this->size == 0)
+    inline List tail() {
+        if (this->top == nullptr)
             throw std::invalid_argument("Empty list, cannot get tail of empty");
         Cell *current = this->top;
         this->top = this -> top -> getNext();
         delete current;
-        --size;
+        return *new List(*this);
     }
 
     inline friend std::ostream &operator<<(std::ostream &os, List& list) {
@@ -69,5 +68,22 @@ public:
         os << "]\n";
         return os;
     };
+
+    void fillList(const int elements[] ,int nbElements);
+
+    Cell* getLast() const {
+      if (top != nullptr) {
+          Cell* current = this -> top;
+          while(current != nullptr)
+              current = current -> getNext();
+          return current;
+      }
+      return top;
+    };
+
+    //TD1 AA//
+
+    friend int length(List list);
+//    friend List append(int newVal,List list);
 };
 

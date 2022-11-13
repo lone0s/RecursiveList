@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/jeune/Documents/Fac/AA/RecList
+# Install script for directory: E:/ohno/Documents/AA/RecursiveList
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/jeune/Documents/Fac/AA/RecList/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "E:/ohno/Documents/AA/RecursiveList/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -38,9 +38,54 @@ int main() {
 //    concat(f.top,g.top);
 //    cout << f;
 //    cout << get(f.top,9);
-
+    cout << "Append bis\n";
+    List res (appendBis(-10,g.top));
+    cout << g ;
+    cout << res;
+    cout << "Fin append bis\n";
     List x;
     x.top = getUnevenIndex(f.top);
-    cout << f;
+    cout << "Reverse func\n";
+    List rev (reverse(x.top));
+    cout << rev;
+    cout << x;
+    List duplique(dupliquer(x.top));
     cout << x ;
+    cout << duplique;
+    cout << x ;
+//    cout << "Uneven indexes\n";
+//    List uneven (getUnevenIndexes(f.top));
+//    cout << uneven;
+
+    cout << "Even indexes\n";
+    cout << f;
+    List even(getEvenIndexes(f.top));
+    cout << even;
+    List uneven(getEvenIndexes(f.top -> getNext()));
+    cout << uneven;
+
+    cout << "Reverse Linear Complexity\n";
+    List reversedLinear(reverseLinear(f.top));
+    cout << f ;
+    cout << reversedLinear;
+
+    List a;
+    List b;
+    int val[3] {1,2,3};
+    int val2[3] {1,4,5};
+    a.fillList(val,3);
+    b.fillList(val2,3);
+
+    List concatOrdered (concatOrderedLists(a.top,b.top));
+    cout << "Ordered : \n";
+    cout << a ;
+    cout << b;
+    cout << concatOrdered;
+
+    List c;
+    int valDup[6] {1,1,1,2,2,3};
+    c.fillList(valDup,6);
+    cout << c;
+    List d (removeDuplicates(c.top));
+    cout << d ;
 }

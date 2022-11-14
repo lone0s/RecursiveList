@@ -19,6 +19,7 @@ public:
         this->top = new Cell(x);
         this->top->setNext(list.top);
     }
+    explicit List(Cell* cell) : top(cell) {};
 
     List(const List& list) : top(list.top){};
 

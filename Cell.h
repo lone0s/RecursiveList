@@ -17,6 +17,11 @@ public:
     Cell(int val, Cell* next) : value(val), next(next) {};
 //    ~Cell() = default;
     ~Cell() {};
+    Cell* Construct(int val, Cell* next) {
+        Cell* temp = new Cell(val);
+        temp -> value = val;
+        temp->next = next;
+    }
     inline int getValue() const {return this->value;};
     inline void setValue(int val) {this -> value = val;};
     inline Cell* getNext() const {return this -> next;};
@@ -38,6 +43,14 @@ public:
         }
         else
             append(val,cell -> getNext());
+    }
+
+    friend Cell* appendBis (int val, Cell* cell) {
+        if (cell == nullptr) {
+            return new Cell(val);
+        }
+        else
+            return new Cell(cell->getValue(),appendBis(val,cell->getNext()));
     }
 
     friend bool has_length(Cell* cell,int k) {
@@ -75,7 +88,59 @@ public:
             concat(l1 -> getNext(), l2);
     }
 
-    friend void reverse(Cell* l) {};
+    friend Cell* reverse(Cell* l) {
+        if (l == nullptr) {
+            return l;
+        }
+        else {
+            append(l->getValue(),reverse(l->getNext()));
+        }
+    };
+
+    friend Cell* getEvenIndexes(Cell* list) {
+        if (list == nullptr || list -> getNext() == nullptr) {
+            return list;
+        }
+        return new Cell(list->value, getEvenIndexes(list -> getNext() -> getNext()));
+    }
+
+    friend Cell* getUnevenIndexes(Cell* l, int cpt = 0) {
+        if (l == nullptr)
+            return l;
+        else if (cpt % 2 == 0) {
+            new Cell(l->value,getUnevenIndexes(l->getNext(),++cpt));
+        }
+    }
+
+    friend Cell* dupliquer(Cell* list) {
+        if (list == nullptr) {
+            return list;
+        }
+        else
+            return new Cell(list -> getValue(), new Cell(list -> getValue(),dupliquer(list->getNext())));
+    }
+
+    friend Cell* reverseLinear(Cell* list) {
+        if (list == nullptr || list -> getNext() == nullptr) {
+            return list;
+        }
+        return reverseAux(list,nullptr);
+    }
+
+    friend Cell* reverseAux(Cell* l1, Cell* l2) {
+        if (l1 == nullptr)
+            return l2;
+        return reverseAux(l1 -> next,new Cell(l1->value,l2));
+    }
+//    friend void dupliquerProcedure (Cell* list ) {
+//        if (list == nullptr)
+//            return;
+//        else {
+//            list ->setNext(new Cell(list -> getValue(),new Cell(list -> getValue(),dupliquerProcedure(list->getNext()))));
+//        }
+//    }
+
+
 
 //    friend void reverseAux (Cell* auxList, Cell* list) {
 //        if (list == nullptr) {
@@ -122,5 +187,35 @@ public:
         }
         getUnevenIndexAux(l->getNext(),aux,++cpt);
     }
+
+    friend Cell* concatOrderedLists(Cell* l1, Cell* l2) {
+        if (l2 == nullptr) {
+            return l1;
+        }
+        else if (l1 == nullptr) {
+            return l2;
+        }
+        else if (l1->value <= l2 -> value) {
+            return new Cell(l1 -> value, concatOrderedLists(l1 -> next, l2));
+        }
+        else
+            return new Cell(l2 -> value, concatOrderedLists(l2->next,l1));
+    }
+
+    friend Cell* removeDuplicates(Cell* list)
+    {
+        return new Cell(list -> value, remDupAux(list->value,list -> next));
+    }
+
+    friend Cell* remDupAux(int i, Cell* list ) {
+        if (list == nullptr) {
+            return list;
+        }
+        else if(list -> value == i)
+            remDupAux(i,list -> next);
+        else
+        return new Cell (list -> value,remDupAux(list -> value,list->next));
+    }
+
 };
 

@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "E:/ohno/Documents/AA/RecursiveList/cmake-build-debug",
-		"source" : "E:/ohno/Documents/AA/RecursiveList"
+		"build" : "C:/Users/jeune/Documents/Fac/AA/RecList/cmake-build-debug",
+		"source" : "C:/Users/jeune/Documents/Fac/AA/RecList"
 	},
 	"version" : 
 	{
